@@ -23,7 +23,7 @@ namespace MVC_TODO.Controllers
             _todos = _hcModel.GetTodos();
         }
 
-
+        
         public ActionResult Index()
         {
             var todoItems = new TodoItems();
