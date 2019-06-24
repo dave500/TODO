@@ -11,10 +11,25 @@ namespace MVC_TODO.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IHCModel _hcModel;
+        private readonly List<Todo> _todos;
+
+
+        public HomeController(IHCModel hcModel)
+        {
+            _hcModel = hcModel;
+            // Mimics decoupled dependancy on external data source
+            _todos = _hcModel.GetTodos();
+        }
+
+
         public ActionResult Index()
         {
             var todoItems = new TodoItems();
-            todoItems.Todos = new List<Todo>();
+            todoItems.Todos = _todos;
+
+            // This is just a POCO to capture the screen input
             todoItems.Item = new Todo();
 
             return View(todoItems);
