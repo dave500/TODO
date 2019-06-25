@@ -1,12 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace MVC_TODO.Models
 {
     public class Todo
     {
         public int TodoID { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        [AllowHtml]
         [Required]
         public string Text { get; set; }
 

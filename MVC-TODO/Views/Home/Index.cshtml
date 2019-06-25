@@ -3,7 +3,7 @@
     ViewBag.Title = "Home Page";
     if (Model.Todos.Count() > 0)
     {
-        // Insure ItemID is always max + 1 irrispective 
+        // Insure ItemID is always max + 1 irrispective
         //of whether an item has been deleted
         var item = Model.Todos.OrderByDescending(i => i.TodoID).FirstOrDefault();
         Model.Item.TodoID = item.TodoID + 1;
@@ -25,42 +25,43 @@
 
 </div>
 
-    <div class="row col-md-10">
-        <h2>Enter To Do Item:</h2>
+<div class="row col-md-10">
+    <h2>Enter To Do Item:</h2>
 
 
-        <div class="outerModelContainer">
-            @using (Html.BeginForm("AddItem", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="myForm" }))
-            {
+    <div class="outerModelContainer">
+        @using (Html.BeginForm("AddItem", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "myForm" }))
+        {
             <p>
                 @Html.HiddenFor(m => m.Item.TodoID)
 
                 @Html.TextAreaFor(m => m.Item.Text, new { @class = "form-control mainInput", required = "required" })
-                @Html.ValidationMessageFor(m => m.Item.Text, "", new { @class = "text-danger" })
+
                 <input id="input1" class="btn btn-default submit" type="submit" value="Add Item" />
             </p>
-
-            }
-            </div>
+            @Html.ValidationMessageFor(m => m.Item.Text, "", new { @class = "text-danger" })
+        }
     </div>
+</div>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table-striped tableboarder">
+<div class="row">
+    <div class="col-md-12">
+        <table class="table-striped tableboarder">
 
-                @if (Model.Todos.Count > 0)  {
-                    <thead>
-                        <tr>
-                            <th class="tableheaderspacing">Complete</th>
-                            <th>Detail</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                }
+            @if (Model.Todos.Count > 0)
+            {
+                <thead>
+                    <tr>
+                        <th class="tableheaderspacing">Complete</th>
+                        <th>Detail</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            }
 
-                @foreach (var item in Model.Todos)
-                {
+            @foreach (var item in Model.Todos)
+            {
                 <tr class="tablebgc">
 
                     <td>
@@ -98,18 +99,20 @@
 
                     <td> <input id="button1" type="button" value="Delete" class="tablebuttonspacing" onclick="location.href='@Url.Action("RemoveItem", "Home", new {itemID = item.TodoID })'" /></td>
                 </tr>
-                }
-            </table>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-12" id="messageBlock">
-            @if ((Model.Todos.Count > 2) && (Model.Todos.Count() == noComplete))
-            {
-                <div class="msg" id="messageBlock">Well Done! All Your Tasks Are Complete</div> 
             }
-        </div>
+        </table>
     </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12" id="messageBlock">
+        @if ((Model.Todos.Count > 2) && (Model.Todos.Count() == noComplete))
+        {
+            <div class="msg" id="messageBlock">Well Done! All Your Tasks Are Complete</div>
+        }
+    </div>
+</div>
+
+@section Scripts {@Scripts.Render("~/bundles/jqueryval")}
 
 
