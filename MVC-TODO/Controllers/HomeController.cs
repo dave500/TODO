@@ -24,8 +24,7 @@ namespace MVC_TODO.Controllers
         [HttpPost]
         public ActionResult AddItem(Models.Todo item)
         {
-            if (ModelState.IsValid)
-            {
+           
                 ModelState.Clear();
                 var currentItems = (List<Todo>)TempData["CurrentItems"] ?? new List<Todo>();
 
@@ -36,9 +35,6 @@ namespace MVC_TODO.Controllers
                 TodoItems todoItems = HomeControllerHelper.CreateModel(currentItems);
 
                 return View("Index", todoItems);
-            }
-
-            return View("Error");
         }
 
         

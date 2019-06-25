@@ -34,10 +34,10 @@
             {
             <p>
                 @Html.HiddenFor(m => m.Item.TodoID)
-               
-                @Html.TextAreaFor(m => m.Item.Text, new { @class = "form-control mainInput", required="required"})
-                    
-                <input id="input1" class="btn btn-default submit" type="submit" value="Add Item" /> 
+
+                @Html.TextAreaFor(m => m.Item.Text, new { @class = "form-control mainInput", required = "required" })
+                @Html.ValidationMessageFor(m => m.Item.Text, "", new { @class = "text-danger" })
+                <input id="input1" class="btn btn-default submit" type="submit" value="Add Item" />
             </p>
 
             }
