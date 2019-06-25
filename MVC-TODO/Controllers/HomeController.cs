@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using MVC_TODO.Helpers;
@@ -23,16 +24,21 @@ namespace MVC_TODO.Controllers
         [HttpPost]
         public ActionResult AddItem(Models.Todo item)
         {
-            ModelState.Clear();
-            var currentItems = (List<Todo>)TempData["CurrentItems"] ?? new List<Todo>();
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+                var currentItems = (List<Todo>)TempData["CurrentItems"] ?? new List<Todo>();
 
-            currentItems.Add(item);
+                currentItems.Add(item);
 
-            TempData["CurrentItems"] = currentItems;
+                TempData["CurrentItems"] = currentItems;
 
-            TodoItems todoItems = HomeControllerHelper.CreateModel(currentItems);
+                TodoItems todoItems = HomeControllerHelper.CreateModel(currentItems);
 
-            return View("Index", todoItems);
+                return View("Index", todoItems);
+            }
+
+            return View("Error");
         }
 
         
